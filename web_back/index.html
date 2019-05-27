@@ -227,9 +227,7 @@
     */
       $(function() {
         // 退出按钮的 点击事件 弹框提示
-        $('.icon-tuichu')
-          .parent()
-          .click(function() {
+        $('.icon-tuichu').parent().click(function() {
             // 弹框
             $('#myModal').modal()
           })
@@ -261,6 +259,8 @@
             $('.user_center_link img').attr('src', backData.data.user_pic)
           }
         })
+        
+     
       })
     </script>
   </body>

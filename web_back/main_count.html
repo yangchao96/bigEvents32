@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row spannel_list">
             <div class="col-sm-3 col-xs-6">
-                <div class="spannel">
+                <div class="spannel scolor00">
                     <em>10015</em><span>篇</span>
                     <b>总文章数</b>
                 </div>
@@ -237,7 +237,7 @@
 
 
       var oColumn = this.echarts.init(document.getElementById('column_show'));
-        var oColumnopt =  
+        var oColumnopt = 
               {
                 title:{
                     text: '文章访问量',
@@ -342,7 +342,28 @@
                   }]
             };
             oColumn.setOption(oColumnopt);
-
+        // 获取统计文章和评论数量
+          $(function(){
+            //向服务器要文章数据
+            $.ajax({
+                url:'https://autumnfish.cn/big32/admin/article_count',
+                type:'get',
+                success:function(backData){
+                    $('.scolor00').children('em').text(backData.data.all_count)
+                    $('.scolor01').children('em').text(backData.data.day_count)
+                }
+            })
+            // 向服务器要评论数据
+            $.ajax({
+                url:'https://autumnfish.cn/big32/admin/comment_count',
+                type:'get',
+                success:function(backData){
+                    console.log(backData)
+                    $('.scolor02').children('em').text(backData.data.all_count)
+                    $('.scolor03').children('em').text(backData.data.day_count)
+                } 
+            })
+          })
     </script>
 
 
