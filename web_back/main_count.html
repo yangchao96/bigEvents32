@@ -346,7 +346,7 @@
           $(function(){
             //向服务器要文章数据
             $.ajax({
-                url:'https://autumnfish.cn/big32/admin/article_count',
+                url:'http://localhost:8000/admin/article_count',
                 type:'get',
                 success:function(backData){
                     $('.scolor00').children('em').text(backData.data.all_count)
@@ -355,7 +355,7 @@
             })
             // 向服务器要评论数据
             $.ajax({
-                url:'https://autumnfish.cn/big32/admin/comment_count',
+                url:'http://localhost:8000/admin/comment_count',
                 type:'get',
                 success:function(backData){
                     console.log(backData)
