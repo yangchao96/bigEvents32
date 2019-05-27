@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+             <!--<tr>
               <td>未分类</td>
               <td>uncategorized</td>
               <td class="text-center">
@@ -96,7 +96,7 @@
                   >删除</a
                 >
               </td>
-            </tr>
+            </tr> -->
           </tbody>
           <tfoot>
             <tr>
@@ -183,7 +183,7 @@
               <td>{{$value.slug}}</td>
               <td class="text-center">
                   <a href='javascript:editTr({"id":"1","slug":"uncategorized","name":"未分类"});' class="btn btn-info btn-xs">编辑</a>
-                  <a href="javascript:deleteTr( 1 );" class="btn btn-danger btn-xs">删除</a>
+                  <a href="javascript:deleteTr({{$value.id}});" class="btn btn-danger btn-xs">删除</a>
               </td>
           </tr>
       {{/each}}
@@ -215,23 +215,24 @@
                 2. 调用接口
                 3. 响应回来之后
 
-          */
-      $(function() {
-        function getCate() {
+          */ 
+          function getCate() {
           $.ajax({
             url: 'https://autumnfish.cn/big32/admin/category_search',
             type: 'get',
             success: function(backData) {
-              // console.log(backData);
+              console.log(backData);
               // 调用方法 渲染页面
               var html = template('cate', backData)
               $('tbody').html(html)
             }
           })
         }
-
+      $(function() {
+       
+      getCate()
         // 默认调用一次
-        getCate()
+      
         // 点击新增按钮
         $('#model_add').click(function() {
           $.ajax({
@@ -245,14 +246,33 @@
               console.log(backData)
               // 隐藏弹出框
               $('#addModal').modal('hide')
-              // if(backData.code==200){
+              //  if(backData.code==200){
                 //  重新获取数据
                 getCate()
-              // }
+              //  }
             }
           })
         })
-      })
+       
+      }) 
+     
+      function deleteTr(num){
+        var id=parseInt($.trim(num));
+        console.log(id);
+        // ajax
+        $.ajax({
+          url:'https://autumnfish.cn/big32/admin/category_delete',
+          type:'post',
+          data:{
+            id:id
+          },
+          success:function(backData){
+            console.log(backData)
+            getCate()
+          }
+        })
+      }
+     
     </script>
   </body>
 </html>
