@@ -92,7 +92,7 @@
           3. 通过ajax 结合formData发送到服务器
           4. 返回数据之后，提示用户
 
-
+        
         */
       $(function() {
         // 获取用户的详细信息
@@ -116,26 +116,25 @@
           // 生成url
           var url=URL.createObjectURL(file)
           // 设置给img
-          console.log(url)
+          // console.log(url)
           $('.user_pic').attr('src',url)
 
         })
         // 保存按钮的点击事件
-        $('.btn-success').click(function(e){
+        $('.btn-success').click(function(e) {
           e.preventDefault()
           // 实例化formData
-          var formData=new FormData($('form')[0])
+          var formData = new FormData($('form')[0])
           $.ajax({
-            url:'http://localhost:8000/admin/userinfo_edit',
-            type:'post',
-            data:FormData,
-            // 不设置请求头
-            contentType:false,
-            // 不把数据变成字符串
-            processData:false,
-            success:function(backData){
+            url: 'http://localhost:8000/admin/userinfo_edit',
+            type: 'post',
+            data: formData,
+            // 不设置头
+            contentType: false,
+            // 不把数据变字符串
+            processData: false,
+            success: function(backData) {
               console.log(backData)
-              
             }
           })
         })
