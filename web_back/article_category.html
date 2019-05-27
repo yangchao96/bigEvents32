@@ -242,13 +242,13 @@
               slug: $('.cate_slug').val()
             },
             success: function(backData) {
-            //   console.log(backData)
+              console.log(backData)
               // 隐藏弹出框
               $('#addModal').modal('hide')
-              if(backData.code==200){
+              // if(backData.code==200){
                 //  重新获取数据
                 getCate()
-              }
+              // }
             }
           })
         })
