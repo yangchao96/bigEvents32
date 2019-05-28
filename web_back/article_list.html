@@ -116,8 +116,29 @@
         })
 
 
-        $(function () {
-                var myPage=1
+        $(function () {  
+            var myPage=1
+            // 页码
+            var $pagination=$('.pagination')
+            var defaultOpts={
+                totalPages: 35,
+                visiblePages: 7, 
+                first: '首页',
+                last: '尾页',
+                prev: '上一页',
+                next: '下一页',
+                onPageClick: function (event, page) {
+                    // 事件参数
+                    // console.log(event)
+                    // 页码
+                    // console.log(page)
+                    myPage = page
+                    // 重新调用获取文章数据的方法
+                    getArticles()
+                }
+            }
+              $pagination.twbsPagination(defaultOpts)
+
             // 获取分页数据
             function getArticles() {
                 $.ajax({
@@ -135,6 +156,8 @@
                         // console.log(backData)
                         var html = template('article', backData)
                         $('tbody').html(html)
+                        // 重置页码
+
                     }
                 })
             }
@@ -151,7 +174,8 @@
                 success: function (backData) {
                     console.log(backData)
                     var html = template('cate', backData)
-                    $('#selCategory').append(html)
+                    $('#selCategory').append(html)   
+
                 }
             })
         //   获取文章数据
@@ -159,23 +183,23 @@
 
            
             // 设置分页的插件
-            $('.pagination').twbsPagination({
-                totalPages: 35,
-                visiblePages: 7, 
-                first: '首页',
-                last: '尾页',
-                prev: '上一页',
-                next: '下一页',
-                onPageClick: function (event, page) {
-                    // 事件参数
-                    // console.log(event)
-                    // 页码
-                    // console.log(page)
-                    myPage = page
-                    // 重新调用获取文章数据的方法
-                    getArticles()
-                }
-            })
+            // $('.pagination').twbsPagination({
+            //     totalPages: 35,
+            //     visiblePages: 7, 
+            //     first: '首页',
+            //     last: '尾页',
+            //     prev: '上一页',
+            //     next: '下一页',
+            //     onPageClick: function (event, page) {
+            //         // 事件参数
+            //         // console.log(event)
+            //         // 页码
+            //         // console.log(page)
+            //         myPage = page
+            //         // 重新调用获取文章数据的方法
+            //         getArticles()
+            //     }
+            // })
         })
     </script>
 
