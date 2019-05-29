@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <!--引入jquery -->
+    <script src="js/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -222,5 +224,39 @@
     </div>
 
 </body>
+<!-- 导入模板 -->
+<script src="js/template-web.js"></script>
+<!-- 定义模板 -->
+<script type="text/html" id="article">
+       {{each data}}
+       {{if $index==0}}
+       <li class="first">
+        {{else}}
+        <li>
+        {{/if}}
+            <a href="./article.html?id={{$value.id}}"><img src="{{$value.cover}}" alt=""></a>
+            <p>{{$value.title}}</p>
+        
+        {{/each}}
+</script>
+<script>
+// 获取文章数据
+$(function(){
+    $.ajax({
+        url:'http://localhost:8000/admin/search',
+        data:{
+            page:1,
+            perpage:5
+        },
+        success:function(backData){
+            // console.log(backData)
+            // 渲染到页面上
+            var html=template('article',backData)
+            $('.focus_list').html(html)
+        }
+    })
+})
+
+</script>
 
 </html>
