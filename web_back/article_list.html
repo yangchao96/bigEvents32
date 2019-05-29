@@ -117,14 +117,13 @@
 
 
         $(function () {  
-                   // 页码
+           // 页码
             var myPage=1
-     
-            // 总页码数
-            var maTotalPage=10
+   // 总页码数
+            var myTotalPage=10
             var $pagination = $('.pagination')
             var defaultOpts={
-                totalPages:maTotalPage,
+                totalPages:myTotalPage,
                 visiblePages: 7, 
                 first: '首页',
                 last: '尾页',
@@ -142,7 +141,7 @@
             }
               $pagination.twbsPagination(defaultOpts)
 
-            // 获取分页数据
+      // 获取分页数据
             function getArticles() {
                 $.ajax({
                     url: 'http://localhost:8000/admin/search',
@@ -161,29 +160,31 @@
                         $('tbody').html(html)
                         // 重置页码
                         var totalPages = backData.totalPage;
-                        if(maTotalPage!=maTotalPage){
+                        if(myTotalPage!=totalPages){
                             // 总页数变了
                             myTotalPage=totalPages
-                             var currentPage = $pagination.twbsPagination('getCurrentPage');
                          $pagination.twbsPagination('destroy');
-                         $pagination.twbsPagination($.extend({}, defaultOpts, {
-                         startPage: currentPage,
-                         totalPages: totalPages0
+                         $pagination.twbsPagination(
+                             $.extend({}, defaultOpts, {
+                        // 当用户到最后一页就跳到第一页
+                         startPage: 1,
+                         totalPages: totalPages
                          }  ))
 
                         }
-
-                       
                         }   
                       })
                     }
-        //  筛选分类
-        $('#btnSearch').click(function(e){
-            e.preventDefault()
-            // 调用获取文章方法
-            getArticles()
-        })
-            // 获取分类数据
+            
+            
+            
+            
+            
+            
+            
+            
+         
+      // 获取分类数据
             $.ajax({
                 url: 'http://localhost:8000/admin/category_search',
                 type: 'get',
@@ -194,6 +195,14 @@
 
                 }
             })
+           
+        //  筛选分类
+        $('#btnSearch').click(function(e){
+            e.preventDefault()
+            // 调用获取文章方法
+            getArticles()
+        })
+            
         //   获取文章数据
              getArticles()
 
