@@ -117,11 +117,14 @@
 
 
         $(function () {  
+                   // 页码
             var myPage=1
-            // 页码
-            var $pagination=$('.pagination')
+     
+            // 总页码数
+            var maTotalPage=10
+            var $pagination = $('.pagination')
             var defaultOpts={
-                totalPages: 35,
+                totalPages:maTotalPage,
                 visiblePages: 7, 
                 first: '首页',
                 last: '尾页',
@@ -157,10 +160,23 @@
                         var html = template('article', backData)
                         $('tbody').html(html)
                         // 重置页码
+                        var totalPages = backData.totalPage;
+                        if(maTotalPage!=maTotalPage){
+                            // 总页数变了
+                            myTotalPage=totalPages
+                             var currentPage = $pagination.twbsPagination('getCurrentPage');
+                         $pagination.twbsPagination('destroy');
+                         $pagination.twbsPagination($.extend({}, defaultOpts, {
+                         startPage: currentPage,
+                         totalPages: totalPages0
+                         }  ))
 
+                        }
+
+                       
+                        }   
+                      })
                     }
-                })
-            }
         //  筛选分类
         $('#btnSearch').click(function(e){
             e.preventDefault()
