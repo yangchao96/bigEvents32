@@ -226,7 +226,7 @@ $(function(){
             id:id
         },
         success:function(backData){
-            // console.log(backData)
+            console.log(backData)
             $('.article_title').text(backData.data.title)
             // 信息
             $(".article_info").html(template('info',backData))

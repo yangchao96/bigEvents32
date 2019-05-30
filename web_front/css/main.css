@@ -276,6 +276,9 @@ body{
 }
 .common_news_list p{
     font-size:12px;
+    width:552px;
+    height:70px;
+    overflow: hidden;
     color:#666;
     line-height:22px;
     margin-top:12px;
